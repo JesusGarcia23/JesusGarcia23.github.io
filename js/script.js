@@ -1,9 +1,10 @@
 
 //------------------------MAKE CUSTOM ALERT, PROMPT---------------------------------------------
 let alertBox = new customAlert();
-let safePrompt = new customPrompt();
+//let safePrompt = new customPrompt(); TESTING
 let controlBox = new showControl();
 
+//-------------------------GETTIN ACCES TO HTML ELEMENT-----------------------------------------
 let introSound = document.querySelector(".introSong");
 
 let playerName = document.querySelector("#playerName");
@@ -18,6 +19,8 @@ let startButton = document.querySelector(".startBttn");
 
 let controlButton = document.querySelector(".controlBttn");
 
+
+//----------------------CONTROL BUTTON------------------------------------------
 controlButton.addEventListener("click", function(){
     controlBox.render();
 })
@@ -30,6 +33,8 @@ let gameOn = true;
 let gameOff = false;
 let gameWon = false;
 
+
+//------------------------START GAME BUTTON--------------------------------------------
 startButton.addEventListener("click", function(){
     playerName.innerHTML = prompt("Introduce your name", "")
     introSound.remove();
@@ -78,7 +83,13 @@ let winSong = new Audio("/sound/winSong.mp3");
 
 let manScream = new Audio("/sound/manScream.mp3");
 
-let unlockSafebox = new Audio("/sound/unlockSafebox.mp3")
+let unlockSafebox = new Audio("/sound/unlockSafebox.mp3");
+
+let paperFlip = new Audio("/sound/paperFlip.mp3");
+
+let grabItemSound = new Audio("/sound/grabItem.mp3");
+
+let flashLightSound = new Audio("/sound/flashlightSound.mp3");
 //------------------------------------CONDITIONALS-------------------------------------------
 let isLightOff = false;
 let showItems = false;
@@ -296,6 +307,7 @@ arrayOfWall.push(safeBox);
 
 
 //-----------------------------PUSH TO ARRAY OF ITEMS------------------------------------------------------------------------
+flashlight.available = true;
 arrayOfItems.push(flashlight);
 
 
@@ -361,6 +373,7 @@ player.characterImg = "/img/character/face-left.png"
         }else{
             player.fashlight = true;
         }
+        flashLightSound.play();
         player.flash();
     }
     break;
@@ -379,6 +392,7 @@ player.characterImg = "/img/character/face-left.png"
 function grabItem(){
         for(let i = 0; i < arrayOfItems.length; i++){
             if(newPlayer.grab(arrayOfItems[i]) === true){
+                grabItemSound.play();
         arrayOfItems[i].showIcon();
         arrayOfItems[i].available = true;
         arrayOfItems.splice(arrayOfItems.indexOf(arrayOfItems[i]) ,1); 
@@ -438,6 +452,7 @@ ghost.y += 2;
 
 }
 
+//--------------------------------METHODS--------------------------------------------
 
 //------------------------------GHOST GRAB FUNCTION-------------------------------
 function characterCaught(player){
@@ -447,7 +462,6 @@ function characterCaught(player){
         manScream.play();
 }
 }
-//--------------------------------METHODS--------------------------------------------
 
 //--------------------------MAKE SOUNDS-----------------------------------------------------
 function playSound(){
@@ -462,6 +476,7 @@ window.addEventListener("keydown", function(event){
     switch(event.keyCode){
         case 69:
             if(bookToRead.use(player) === true){
+                paperFlip.play();
                 alertBox.render(bookToRead.text);
             }
     }
@@ -499,58 +514,6 @@ window.addEventListener("keydown", function(event){
 
 })
 }
-//=-------------------------------------QUESTS----------------------------------------------------------------
-//----------------------------FIRST QUEST-----------------------------------------
-function questOne(){
-    if(quest1 == true){
-    objectiveText.innerHTML = "Find the exit";
-}if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === false){
-    quest1 = false;
-    quest2 = true;
-    enviromentText.innerHTML = "Door closed";
-}
-
-}
-
-
-//-------------------------SECOND QUEST----------------------------------
-function questTwo(){
-    if(quest2 === true){
-    if(finalKey.available === false){
-        safeBoxOn = true;
-        enviromentText.innerHTML = "";
-        objectiveText.innerHTML = "Find the key";
-        enviromentText.innerHTML = "Did you really think, It was going to be easy?";
-
-        setTimeout(function(){
-            turnLightsOff();
-        }, 3000)
-     
-        
-        setTimeout(function(){
-            showItems = true;
-        }, 7000);
-
-        setTimeout(function(){
-            showGhost = true;
-        }, 30000);
-    }
-    quest2 = false;
-}
-}
-
-//----------------------------LAST QUEST--------------------------------
-function lastQuest(){
-    if(quest3 === true){
-    objectiveText.innerHTML = "Go to the exit (orange carpet)";
-    if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === true){
-        gameOn = false;
-        gameWon = true;
-        gameOff = true;
-        bckgrSoundOn = false;
-    }
-}
-}
 
 //--------------------------TURN LIGHTS OFF-----------------------------------------------
 function turnLightsOff(){
@@ -580,6 +543,59 @@ function generateEnviroText(){
  }
  , 4000)
 }
+//=-------------------------------------QUESTS----------------------------------------------------------------
+//----------------------------FIRST QUEST-----------------------------------------
+function questOne(){
+    if(quest1 == true){
+    objectiveText.innerHTML = "Find the exit";
+}if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === false){
+    quest1 = false;
+    quest2 = true;
+    enviromentText.innerHTML = "Door closed";
+}
+
+}
+
+
+//-------------------------SECOND QUEST----------------------------------
+function questTwo(){
+    if(quest2 === true){
+    if(finalKey.available === false){
+        safeBoxOn = true;
+        enviromentText.innerHTML = "";
+        objectiveText.innerHTML = "Find the key";
+        enviromentText.innerHTML = "Did you really think, It was going to be easy?";
+
+        setTimeout(function(){
+            turnLightsOff();
+        }, 3000)
+     
+        
+        setTimeout(function(){
+           finalKey.available = true;
+        }, 7000);
+
+        setTimeout(function(){
+            showGhost = true;
+        }, 30000);
+    }
+    quest2 = false;
+}
+}
+
+//----------------------------LAST QUEST--------------------------------
+function lastQuest(){
+    if(quest3 === true){
+    objectiveText.innerHTML = "Go to the exit (orange carpet)";
+    if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === true){
+        gameOn = false;
+        gameWon = true;
+        gameOff = true;
+        bckgrSoundOn = false;
+    }
+}
+}
+
 
 let frame = 0;
 
@@ -604,7 +620,7 @@ frame++;
     }
  
     newPlayer.draw();
- 
+
     if(showGhost === true){
         ghost.draw();
         moveGhost(ghost, ghost.direction);
@@ -618,8 +634,8 @@ frame++;
     for(let i = 0; i < arrayOfWall.length; i++){
         arrayOfWall[i].draw();
     }
-    if(showItems === true){
         for(let i = 0; i < arrayOfItems.length; i++){
+            if(arrayOfItems[i].available === true){
             arrayOfItems[i].draw();
     }
 }
@@ -696,6 +712,21 @@ let light = document.styleSheets[0].cssRules[5];
     myCanvas.style.backgroundSize = "cover";
     myCanvas.style.backgroundPositionY = "-100px"
     myCanvas.style.backgroundRepeat = "no-repeat";
+
+
+    context.fillStyle = "white";
+    context.font = "80px Arial";
+    context.fillText("You survived!", myCanvas.width/3.5, 200);
+
+    context.fillStyle = "white";
+    context.font = "30px Arial";
+    context.fillText("for now....", myCanvas.width/3.5, 300);
+
+     context.fillStyle = "white";
+     context.font = "60px Arial";
+    context.fillText("Will Continue.....", myCanvas.width/2, myCanvas.height - 100);
+
+
 }
 
 
