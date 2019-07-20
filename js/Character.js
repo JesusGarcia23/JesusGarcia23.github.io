@@ -10,7 +10,8 @@ class Character {
     this.height = height;
     this.orientation = "SOUTH";
     this.step = 0;
-    this.fashlight = true;
+    this.flashlight = false;
+    //this.theBag = [];
     
     this.draw = function(){
         let chrtImg = new Image();
@@ -20,13 +21,13 @@ class Character {
     }
     
     this.update = function() {
-        document.documentElement.style.setProperty('--objectX', (this.x + 100) + 'px');
+        document.documentElement.style.setProperty('--objectX', (this.x + 150) + 'px');
         document.documentElement.style.setProperty('--objectY', (this.y + 20) + 'px');
     }
     
     this.flash = function(){
         let flashLightOn = document.styleSheets[0].cssRules[5];
-        if(this.fashlight === true){
+        if(this.flashlight === true){
         flashLightOn.style.background = "radial-gradient(circle 8vmax at var(--objectX) var(--objectY), rgba(0,0,0, 0) 0%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.90) 100%)";
     }else{
         flashLightOn.style.background = "radial-gradient(circle 4vmax at var(--objectX) var(--objectY), rgba(0,0,0, 0) 0%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.90) 100%)";

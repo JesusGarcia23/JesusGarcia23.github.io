@@ -50,10 +50,11 @@ myCanvas.height = 600;
 let arrayOfWall = [];
 let arrayOfObjects = [];
 let arrayOfItems = [];
+let arrayOfBooks = [];
 
 let arrayOfRandomText = ["Im going.... to kill...you", "I remember...when I was......Alive", "look behind you....", "....There you are.....",
 "The swimming pool... I need to get there.....", "HINT: When there are 4, everything goes better", "where are you....?", "..come with me.....",
-"I want to find the way.....to get you.", "Be afraid. Be very afraid...", "Sometimes dead is better", "abandoned....by God", "That cold ain't the weather. That's death approaching..",
+"I want to find the way.....to get you.", "Be afraid. Be very afraid...", "Pray while you are alive", "abandoned....by God", "That cold ain't the weather. That's death approaching..",
 "Do you want to see me?..", "I feel so alone...", "Let's play...", "There is just one difference between us...you're alive.."];
 
 let showRandomPosition = Math.floor(Math.random() * 4);
@@ -131,11 +132,29 @@ let largeTable4 = new Furniture("/img/largeTable.png", 600, 350, 150, 40);
 let largeTable5 = new Furniture("/img/largeTable.png", 750, 200, 150, 40);
 let largeTable6 = new Furniture("/img/largeTable.png", 750, 350, 150, 40);
 
-let dinnerTable = new Furniture("/img/dinnerTable.png", 70, 470, 80, 80);
-let dinnerChair = new Furniture("/img/dinnerChairLeft.png", 30, 490, 40, 40);
-let dinnerChair2 = new Furniture("/img/dinnerChairRight.png", 150, 490, 40, 40);
-let dinnerChair3 = new Furniture("/img/dinnerChairTop.png", 89, 430, 40, 40);
-let dinnerChair4 = new Furniture("/img/dinnerChairBottom.png", 89, 550, 40, 40);
+let dinnerTable = new Furniture("/img/dinnerTable.png", 100, 470, 80, 80);
+let dinnerChair = new Furniture("/img/dinnerChairLeft.png", 60, 490, 40, 40);
+let dinnerChair2 = new Furniture("/img/dinnerChairRight.png", 180, 490, 40, 40);
+let dinnerChair3 = new Furniture("/img/dinnerChairTop.png",119, 430, 40, 40);
+let dinnerChair4 = new Furniture("/img/dinnerChairBottom.png", 119, 550, 40, 40);
+
+let workbench = new Furniture("/img/Workbench-1.png", 490, 10, 145, 30);
+let workbench2 = new Furniture("/img/Workbench-1.png", 635, 10, 145, 30);
+let workbench3 = new Furniture("/img/Workbench-1.png", 780, 10, 145, 30);
+
+let refri = new Furniture("/img/Refri.png", 130, 290, 70, 30);
+let cook = new Furniture("/img/Cook.png", 10, 330, 50, 50);
+let kitchen = new Furniture("/img/kitchen.png", 10, 290, 100 , 40);
+let kitchen2 = new Furniture("/img/kitchen.png", 10, 380, 50 , 50);
+
+
+let desktopTable = new Furniture("/img/Desktop_Table.png", 1128, 10, 100, 40)
+let desktopTable2 = new Furniture("/img/desktopTable2.png", 1228, 10, 40, 100)
+let desktopChair = new Furniture("/img/deskchair.png", 1180, 60, 40, 40);
+
+let roundTable = new Furniture("/img/RoundTable.png", 220, 15, 50, 60)
+let singleChair1 = new Furniture("/img/singleChair.png", 180, 10, 30, 30);
+let singleChair2 = new Furniture("/img/singleChair2.png", 240, 80, 30, 30);
 
 let smallBlueSofa = new Furniture("/img/miniBlueSofa.png", 290, 70, 40, 50);
 let blueSofa = new Furniture("/img/blueSofa.png", 332, 10, 100, 50);
@@ -150,7 +169,7 @@ let papers2 = new Furniture("/img/papers.png", 1050, 30, 20, 20);
 let papers3 = new Furniture("/img/papers.png", 1050, 30, 20, 20);
 
 //-------------------------------INSTANCES OF BOOKS-------------------------------------------------------------
-let book = new Book("/img/books.png", 1100, 20, 100, 30, "It has been so long.. 4 months inside this room, there is no a safe place, It is just a matter of time before they find us.\
+let book = new Book("/img/books.png", 1140, 20, 100, 30, "It has been so long.. 4 months inside this room, there is no a safe place, It is just a matter of time before they find us.\
  We are running out of water and food, I'll go out to find help. There are two keys, I'll bring one with me, the other one is inside a safebox in the dining room.\
  <br>The password is: 9856460\
  <br><br><br><br><br><br><br><br>-Milos.");
@@ -158,6 +177,8 @@ let book = new Book("/img/books.png", 1100, 20, 100, 30, "It has been so long.. 
  let book2 = new Book("/img/books.png", 30, 140, 100, 30, "I don't know how I got here, those things are everywhere, It's so cold, I'm scared, I can't even sleep, when I try I feel\
  my nightmares so real, Mom... where are you?\n\n\n\n\n\
  <br><br><br><br><br><br><br><br><br><br>-Nathan.");
+
+ let book3 = new Book("/img/book1.png", 230, 40, 20, 20, " "); //START ROOM BOOK
 //--------------------------------INSTANCES OF ITEMS-----------------------------------------------------------------
 let flashlight = new Item("/img/Flashlight-2.png", 520, 15, 35, 40, "/img/Flashlight-1.png"); 
 let finalKey = new Item("/img/Key-1.png", 250, 570, 25, 20, "/img/Key-1.png");
@@ -282,15 +303,30 @@ arrayOfWall.push(largeTable4);
 arrayOfWall.push(largeTable5);
 arrayOfWall.push(largeTable6);
 
+arrayOfWall.push(workbench);
+arrayOfWall.push(workbench2);
+arrayOfWall.push(workbench3);
+
+arrayOfWall.push(refri);
+arrayOfWall.push(cook);
+arrayOfWall.push(kitchen);
+arrayOfWall.push(kitchen2);
+arrayOfWall.push(roundTable);
+
+arrayOfWall.push(desktopTable);
+arrayOfWall.push(desktopTable2);
 
 arrayOfWall.push(dinnerTable);
 arrayOfObjects.push(dinnerChair);
 arrayOfObjects.push(dinnerChair2);
 arrayOfObjects.push(dinnerChair3);
 arrayOfObjects.push(dinnerChair4);
+arrayOfObjects.push(desktopChair);
 
 arrayOfObjects.push(smallBlueSofa);
 arrayOfObjects.push(blueSofa);
+arrayOfObjects.push(singleChair1);
+arrayOfObjects.push(singleChair2);
 arrayOfWall.push(plant);
 arrayOfWall.push(plant2);
 
@@ -300,8 +336,9 @@ arrayOfObjects.push(blood2);
 arrayOfObjects.push(papers);
 arrayOfObjects.push(papers2);
 arrayOfObjects.push(papers3);
-arrayOfObjects.push(book);
-arrayOfObjects.push(book2);
+arrayOfBooks.push(book);
+arrayOfBooks.push(book2);
+arrayOfBooks.push(book3);
 arrayOfWall.push(safeBox);
 
 
@@ -367,11 +404,11 @@ player.characterImg = "/img/character/face-left.png"
     break;
 
     case 70: //KEYBOARD F (FLASHLIGHT) 
-    if(flashlight.available === true && isLightOff === true){
-        if(player.fashlight === true){
-            player.fashlight = false;
+    if(flashlight.available === true && isLightOff === true && flashlight.usable === true){
+        if(player.flashlight === true){
+            player.flashlight = false;
         }else{
-            player.fashlight = true;
+            player.flashlight = true;
         }
         flashLightSound.play();
         player.flash();
@@ -395,6 +432,7 @@ function grabItem(){
                 grabItemSound.play();
         arrayOfItems[i].showIcon();
         arrayOfItems[i].available = true;
+        arrayOfItems[i].usable = true;
         arrayOfItems.splice(arrayOfItems.indexOf(arrayOfItems[i]) ,1); 
         }
     }
@@ -640,6 +678,10 @@ frame++;
     }
 }
 
+for(let i = 0; i < arrayOfBooks.length; i++){
+    arrayOfBooks[i].draw();
+}
+
 if(quest1 === true){
     questOne();
 }
@@ -674,7 +716,7 @@ unlockSafeBox(newPlayer);
 movePlayer(newPlayer);
 readBook(newPlayer, book);
 readBook(newPlayer, book2);
-
+readBook(newPlayer, book3);
 
 
 
