@@ -21,7 +21,7 @@ class Character {
     
     this.update = function() {
         document.documentElement.style.setProperty('--objectX', (this.x + 150) + 'px');
-        document.documentElement.style.setProperty('--objectY', (this.y + 25) + 'px');
+        document.documentElement.style.setProperty('--objectY', (this.y + 20) + 'px');
     }
     
     this.flash = function(){
