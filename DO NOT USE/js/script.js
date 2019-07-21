@@ -1,36 +1,45 @@
 
-let introSound = document.querySelector(".introSong");
-console.log(introSound);
+//------------------------MAKE CUSTOM ALERT, PROMPT---------------------------------------------
+let alertBox = new customAlert();
+//let safePrompt = new customPrompt(); TESTING
+let controlBox = new showControl();
 
-let overSound = document.querySelector(".gameOverSong")
+//-------------------------GETTIN ACCES TO HTML ELEMENT-----------------------------------------
+let introSound = document.querySelector(".introSong");
+
+let playerName = document.querySelector("#playerName");
+
+let status = document.querySelector("#status");
+
+let overSound = document.querySelector(".gameOverSong");
 
 let introMainScreen = document.querySelector("#introScreen");
 
 let startButton = document.querySelector(".startBttn");
-console.log(startButton);
 
-let controlButton = document.querySelector('#controlBttn');
+let controlButton = document.querySelector(".controlBttn");
+
+
+//----------------------CONTROL BUTTON------------------------------------------
+controlButton.addEventListener("click", function(){
+    controlBox.render();
+})
 
 const myCanvas = document.getElementById("myBoard");
 const context = myCanvas.getContext("2d");
 
-
 let introOn = true;
 let gameOn = true;
 let gameOff = false;
+let gameWon = false;
 
 
-
-// controlButton.addEventListener("click", function(){
-    
-// })
-
-
+//------------------------START GAME BUTTON--------------------------------------------
 startButton.addEventListener("click", function(){
+    playerName.innerHTML = prompt("Introduce your name", "")
     introSound.remove();
     introMainScreen.style.display = "none";
     myCanvas.style.display = "block";
-    theStatus.style.display = "block";
     animate();
 })
 
@@ -41,11 +50,12 @@ myCanvas.height = 600;
 let arrayOfWall = [];
 let arrayOfObjects = [];
 let arrayOfItems = [];
+let arrayOfBooks = [];
 
 let arrayOfRandomText = ["Im going.... to kill...you", "I remember...when I was......Alive", "look behind you....", "....There you are.....",
 "The swimming pool... I need to get there.....", "HINT: When there are 4, everything goes better", "where are you....?", "..come with me.....",
-"I want to find the way.....to get you.", "Be afraid. Be very afraid...", "Sometimes dead is better", "abandoned....by God", "That cold ain't the weather. That's death approaching..",
-"Do you want to see me?..", "I've been waiting for so long...and the moment never came in"];
+"I want to find the way.....to get you.", "Be afraid. Be very afraid...", "Pray while you are alive", "abandoned....by God", "That cold ain't the weather. That's death approaching..",
+"Do you want to see me?..", "I feel so alone...", "Let's play...", "There is just one difference between us...you're alive.."];
 
 let showRandomPosition = Math.floor(Math.random() * 4);
 let arrayOfGhostShow = [
@@ -55,7 +65,9 @@ let arrayOfGhostShow = [
     {x:602, y:130}
 ];
 
-
+//-------------------------GAME OVER PICTURE--------------------------------------------------
+let youDied = new Image();
+youDied.src = "/img/YouHaveDied.png"
 //----------------------------------------SOUND-------------------------------------------------
 let bckgrSound = new Audio("/sound/backgroundSong.mp3");
 let bckgrSoundOn = true;
@@ -67,6 +79,18 @@ let gameOverSong = new Audio("/sound/gameOverSong.mp3");
 let ghostSound = new Audio("/sound/ghostShow.mp3");
 
 let introSong = new Audio("/sound/introSong.mp3");
+
+let winSong = new Audio("/sound/winSong.mp3");
+
+let manScream = new Audio("/sound/manScream.mp3");
+
+let unlockSafebox = new Audio("/sound/unlockSafebox.mp3");
+
+let paperFlip = new Audio("/sound/paperFlip.mp3");
+
+let grabItemSound = new Audio("/sound/grabItem.mp3");
+
+let flashLightSound = new Audio("/sound/flashlightSound.mp3");
 //------------------------------------CONDITIONALS-------------------------------------------
 let isLightOff = false;
 let showItems = false;
@@ -74,6 +98,7 @@ let showGhost = false;
 let safeBoxUsed = false;
 let safeBoxOn = false;
 let ghostSoundOn = true;
+
 //-------------------------------------QUESTS----------------------------------------------------------------
 let quest1 = true;
 let quest2 = false;
@@ -81,10 +106,6 @@ let quest3 = false;
 
 
 //----------------------------GET HTML ELEMENTS--------------------------------------------------
-
-//-------------------STATUS BAR-----------------------------------
-let theStatus = document.getElementById('status');
-
 
 //-----------------------ITEM LIST---------------------------
 let itemIcon = document.getElementsByClassName('item-list');
@@ -94,6 +115,7 @@ let objectiveText = document.querySelector("#obj");
 
 //---------------ENVIROMENT-------------------------------------
 let enviromentText = document.querySelector("#enviro");
+
 
 //--------------------------------INSTANCES OF FURNITURE----------------------------------------------------------------------
 let blood = new Furniture("/img/blood.png", 650, 420, 150, 50);
@@ -110,11 +132,29 @@ let largeTable4 = new Furniture("/img/largeTable.png", 600, 350, 150, 40);
 let largeTable5 = new Furniture("/img/largeTable.png", 750, 200, 150, 40);
 let largeTable6 = new Furniture("/img/largeTable.png", 750, 350, 150, 40);
 
-let dinnerTable = new Furniture("/img/dinnerTable.png", 70, 470, 80, 80);
-let dinnerChair = new Furniture("/img/dinnerChairLeft.png", 30, 490, 40, 40);
-let dinnerChair2 = new Furniture("/img/dinnerChairRight.png", 150, 490, 40, 40);
-let dinnerChair3 = new Furniture("/img/dinnerChairTop.png", 89, 430, 40, 40);
-let dinnerChair4 = new Furniture("/img/dinnerChairBottom.png", 89, 550, 40, 40);
+let dinnerTable = new Furniture("/img/dinnerTable.png", 100, 470, 80, 80);
+let dinnerChair = new Furniture("/img/dinnerChairLeft.png", 60, 490, 40, 40);
+let dinnerChair2 = new Furniture("/img/dinnerChairRight.png", 180, 490, 40, 40);
+let dinnerChair3 = new Furniture("/img/dinnerChairTop.png",119, 430, 40, 40);
+let dinnerChair4 = new Furniture("/img/dinnerChairBottom.png", 119, 550, 40, 40);
+
+let workbench = new Furniture("/img/Workbench-1.png", 490, 10, 145, 30);
+let workbench2 = new Furniture("/img/Workbench-1.png", 635, 10, 145, 30);
+let workbench3 = new Furniture("/img/Workbench-1.png", 780, 10, 145, 30);
+
+let refri = new Furniture("/img/Refri.png", 130, 290, 70, 30);
+let cook = new Furniture("/img/Cook.png", 10, 330, 50, 50);
+let kitchen = new Furniture("/img/kitchen.png", 10, 290, 100 , 40);
+let kitchen2 = new Furniture("/img/kitchen.png", 10, 380, 50 , 50);
+
+
+let desktopTable = new Furniture("/img/Desktop_Table.png", 1128, 10, 100, 40)
+let desktopTable2 = new Furniture("/img/desktopTable2.png", 1228, 10, 40, 100)
+let desktopChair = new Furniture("/img/deskchair.png", 1180, 60, 40, 40);
+
+let roundTable = new Furniture("/img/RoundTable.png", 220, 15, 50, 60)
+let singleChair1 = new Furniture("/img/singleChair.png", 180, 10, 30, 30);
+let singleChair2 = new Furniture("/img/singleChair2.png", 240, 80, 30, 30);
 
 let smallBlueSofa = new Furniture("/img/miniBlueSofa.png", 290, 70, 40, 50);
 let blueSofa = new Furniture("/img/blueSofa.png", 332, 10, 100, 50);
@@ -127,8 +167,18 @@ let safeBox = new Furniture("/img/safeBox-1.png", 260, 550, 50, 50);
 let papers = new Furniture("/img/papers.png", 1050, 20, 20, 20);
 let papers2 = new Furniture("/img/papers.png", 1050, 30, 20, 20);
 let papers3 = new Furniture("/img/papers.png", 1050, 30, 20, 20);
-let book = new Furniture("/img/books.png", 1100, 20, 100, 30);
 
+//-------------------------------INSTANCES OF BOOKS-------------------------------------------------------------
+let book = new Book("/img/books.png", 1140, 20, 100, 30, "It has been so long.. 4 months inside this room, there is no a safe place, It is just a matter of time before they find us.\
+ We are running out of water and food, I'll go out to find help. There are two keys, I'll bring one with me, the other one is inside a safebox in the dining room.\
+ <br>The password is: 9856460\
+ <br><br><br><br><br><br><br><br>-Milos.");
+
+ let book2 = new Book("/img/books.png", 30, 140, 100, 30, "I don't know how I got here, those things are everywhere, It's so cold, I'm scared, I can't even sleep, when I try I feel\
+ my nightmares so real, Mom... where are you?\n\n\n\n\n\
+ <br><br><br><br><br><br><br><br><br><br>-Nathan.");
+
+ let book3 = new Book("/img/book1.png", 230, 40, 20, 20, " "); //START ROOM BOOK
 //--------------------------------INSTANCES OF ITEMS-----------------------------------------------------------------
 let flashlight = new Item("/img/Flashlight-2.png", 520, 15, 35, 40, "/img/Flashlight-1.png"); 
 let finalKey = new Item("/img/Key-1.png", 250, 570, 25, 20, "/img/Key-1.png");
@@ -192,10 +242,7 @@ let finalRoomWall2 = new Wall(1040, 350, 250, 10);
 let newPlayer = new Character("/img/character/face-down.png", 20, 40, 40, 40);
 
 //-----------------CREATE GHOST INSTANCE-------------------------------------
-let ghost = new Ghost(arrayOfGhostShow[showRandomPosition].x, arrayOfGhostShow[showRandomPosition].y, 50, 50);
-
-//--------------CREATE BUTTON INSTANCE-----------------------------------------------
-let startGameButton = new Button("Start Game",  (myCanvas.width / 2.5),  (myCanvas.height / 1.2), 60, "darkGray", "Helvetica");
+let ghost = new Ghost("/img/GhostDown.png",arrayOfGhostShow[showRandomPosition].x, arrayOfGhostShow[showRandomPosition].y, 50, 50);
 
 //-------------------------PUSH TO ARRAY OF WALLS----------------------------------------------
 
@@ -256,15 +303,30 @@ arrayOfWall.push(largeTable4);
 arrayOfWall.push(largeTable5);
 arrayOfWall.push(largeTable6);
 
+arrayOfWall.push(workbench);
+arrayOfWall.push(workbench2);
+arrayOfWall.push(workbench3);
+
+arrayOfWall.push(refri);
+arrayOfWall.push(cook);
+arrayOfWall.push(kitchen);
+arrayOfWall.push(kitchen2);
+arrayOfWall.push(roundTable);
+
+arrayOfWall.push(desktopTable);
+arrayOfWall.push(desktopTable2);
 
 arrayOfWall.push(dinnerTable);
 arrayOfObjects.push(dinnerChair);
 arrayOfObjects.push(dinnerChair2);
 arrayOfObjects.push(dinnerChair3);
 arrayOfObjects.push(dinnerChair4);
+arrayOfObjects.push(desktopChair);
 
 arrayOfObjects.push(smallBlueSofa);
 arrayOfObjects.push(blueSofa);
+arrayOfObjects.push(singleChair1);
+arrayOfObjects.push(singleChair2);
 arrayOfWall.push(plant);
 arrayOfWall.push(plant2);
 
@@ -274,14 +336,16 @@ arrayOfObjects.push(blood2);
 arrayOfObjects.push(papers);
 arrayOfObjects.push(papers2);
 arrayOfObjects.push(papers3);
-arrayOfObjects.push(book);
-
+arrayOfBooks.push(book);
+arrayOfBooks.push(book2);
+arrayOfBooks.push(book3);
 arrayOfWall.push(safeBox);
 
 
 
 //-----------------------------PUSH TO ARRAY OF ITEMS------------------------------------------------------------------------
-
+flashlight.available = true;
+arrayOfItems.push(flashlight);
 
 
 
@@ -340,12 +404,13 @@ player.characterImg = "/img/character/face-left.png"
     break;
 
     case 70: //KEYBOARD F (FLASHLIGHT) 
-    if(flashlight.available === true && isLightOff === true){
-        if(player.fashlight === true){
-            player.fashlight = false;
+    if(flashlight.available === true && isLightOff === true && flashlight.usable === true){
+        if(player.flashlight === true){
+            player.flashlight = false;
         }else{
-            player.fashlight = true;
+            player.flashlight = true;
         }
+        flashLightSound.play();
         player.flash();
     }
     break;
@@ -364,19 +429,22 @@ player.characterImg = "/img/character/face-left.png"
 function grabItem(){
         for(let i = 0; i < arrayOfItems.length; i++){
             if(newPlayer.grab(arrayOfItems[i]) === true){
+                grabItemSound.play();
         arrayOfItems[i].showIcon();
         arrayOfItems[i].available = true;
+        arrayOfItems[i].usable = true;
         arrayOfItems.splice(arrayOfItems.indexOf(arrayOfItems[i]) ,1); 
         }
     }
     }
 
 //-----------------------LOGIC TO MOVE GHOST----------------------------------------
-function moveGhost(direct){
+function moveGhost(ghost, direct){
     let randomDirection = ["EAST", "WEST", "NORTH", "SOUTH"]; //randomDirection[Math.floor(Math.random() * 4)
 
     switch(direct){
     case "EAST":
+            ghost.theImg = "/img/GhostRight.png";
         for(let i = 0; i < arrayOfWall.length; i++){
             if(ghost.collision(arrayOfWall[i]) === true){
                 ghost.x -= 2;
@@ -386,6 +454,7 @@ function moveGhost(direct){
 ghost.x += 3; 
     break;
    case "WEST":
+        ghost.theImg = "/img/GhostLeft.png";
          for(let i = 0; i < arrayOfWall.length; i++){
             if(ghost.collision(arrayOfWall[i]) === true){
         ghost.x += 2;
@@ -396,6 +465,7 @@ ghost.x += 3;
     break;
 
     case "NORTH":
+            ghost.theImg = "/img/GhostUp.png";
         for(let i = 0; i < arrayOfWall.length; i++){
             if(ghost.collision(arrayOfWall[i]) === true){
            ghost.y += 2;
@@ -405,6 +475,7 @@ ghost.x += 3;
 ghost.y -= 2;
     break;
     case "SOUTH":
+            ghost.theImg = "/img/GhostDown.png";
             for(let i = 0; i < arrayOfWall.length; i++){
                 if(ghost.collision(arrayOfWall[i]) === true){
  
@@ -419,47 +490,16 @@ ghost.y += 2;
 
 }
 
-//----------------FLASHLIGHT V3-------------------------------------------------
-function turnLightOffV2(player){
-let grd = context.createRadialGradient(player.x, player.y, 0, player.x, player.y, 150);
-grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
-
-// Fill with gradient
-context.fillStyle = grd;
-context.fillRect(0, 0, myCanvas.width - 10,  myCanvas.height);
-}
-
-
-//---------------FLASHLIGHT V2----------------------------------------------------
-// function turnsLightsOffV2(cx, cy, radius){
-//     console.log("TURNS LIGHT OFF V2 ACTIVATED")
-// context.save();
-// context.clearRect(0,0, myCanvas.width, myCanvas.height);
-// let radialGradient = context.createRadialGradient(cx, cy, 1, cx, cy, radius);
-
-// radialGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
-// radialGradient.addColorStop(0.65, 'rgba(0, 0, 0, 1)');
-// radialGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-// context.beginPath();
-// context.fillStyle = '#000';
-// context.fillRect(0, 0, myCanvas.width, myCanvas.height);
-// context.globalCompositeOperation = 'destination-out';
-// context.arc(cx, cy, radius, 0, Math.PI * 2, false);
-
-// context.restore();
-// }
-
+//--------------------------------METHODS--------------------------------------------
 
 //------------------------------GHOST GRAB FUNCTION-------------------------------
 function characterCaught(player){
     if(ghost.collision(player) === true){
-        console.log("You are dead");
         gameOff = true;
+        manScream.volume = 1;
+        manScream.play();
 }
 }
-//--------------------------------METHODS--------------------------------------------
 
 //--------------------------MAKE SOUNDS-----------------------------------------------------
 function playSound(){
@@ -468,28 +508,32 @@ function playSound(){
     }
 }
 
-
-
-
-//=-------------------------------------QUESTS----------------------------------------------------------------
-
-function readBook(player){
-
+//-----------------------------------READ BOOKS----------------------------------------------------------------
+function readBook(player, bookToRead){
+window.addEventListener("keydown", function(event){
+    switch(event.keyCode){
+        case 69:
+            if(bookToRead.use(player) === true){
+                paperFlip.play();
+                alertBox.render(bookToRead.text);
+            }
+    }
+})
 }
-
-
 
 
 //----------------------------SAFEBOX-------------------------------------------------
 function unlockSafeBox(player){
-    let pssword = "123456";
-    let answer;
+    let pssword = "9856460";
 window.addEventListener("keydown", function(event){
+    let answer;
     switch(event.keyCode){
         case 69:
-        if(player.collision(safeBox) === true  && safeBoxUsed === false && safeBoxOn === true){
-         answer = prompt("Insert the Password (6 digits)", "000000");
+        if(player.collision(safeBox) === true && safeBoxUsed === false && safeBoxOn === true){ 
+          answer = prompt("Insert the Password (6 digits)", "000000");
+        // safePrompt.render("SAFE LOCK", checkPassword);
          if(answer === pssword){
+            unlockSafebox.play();
             safeBoxOn = false;
             safeBoxUsed = true;
             setTimeout(function(){
@@ -503,54 +547,10 @@ window.addEventListener("keydown", function(event){
         break;
 }
 
+
 }
 
 })
-}
-//----------------------------FIRST QUEST-----------------------------------------
-function questOne(){
-    if(quest1 == true){
-    objectiveText.innerHTML = "Find the exit";
-}if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === false){
-    quest1 = false;
-    quest2 = true;
-    enviromentText.innerHTML = "Door closed";
-}
-
-}
-
-//-------------------------SECOND QUEST----------------------------------
-function questTwo(){
-    if(quest2 === true){
-    if(finalKey.available === false){
-        
-        safeBoxOn = true;
-        enviromentText.innerHTML = "";
-        objectiveText.innerHTML = "Find the key";
-        enviromentText.innerHTML = "Did you really think, It was going to be easy?";
-        
-        setTimeout(function(){
-            isLightOff = true;
-            showItems = true;
-        }, 7000);
-
-        setTimeout(function(){
-            showGhost = true;
-        }, 30000);
-    }
-    quest2 = false;
-}
-}
-
-//----------------------------LAST QUEST--------------------------------
-function lastQuest(){
-    if(quest3 === true){
-    objectiveText.innerHTML = "Go to the exit (orange carpet)";
-    if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === true){
-        console.log("YOU WON");
-        bckgrSoundOn = false;
-    }
-}
 }
 
 //--------------------------TURN LIGHTS OFF-----------------------------------------------
@@ -572,7 +572,6 @@ setTimeout(function(){
 }
 
 //--------------------------MAKE SOUNDS-----------------------------------------------------
-let pressed = false;
 //----------------------------------GENERATE RANDOM MESSAGES ON ENVIROMENT-----------------------------------------
 function generateEnviroText(){
  enviromentText.innerHTML = arrayOfRandomText[Math.floor(Math.random() * arrayOfRandomText.length)];
@@ -582,6 +581,59 @@ function generateEnviroText(){
  }
  , 4000)
 }
+//=-------------------------------------QUESTS----------------------------------------------------------------
+//----------------------------FIRST QUEST-----------------------------------------
+function questOne(){
+    if(quest1 == true){
+    objectiveText.innerHTML = "Find the exit";
+}if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === false){
+    quest1 = false;
+    quest2 = true;
+    enviromentText.innerHTML = "Door closed";
+}
+
+}
+
+
+//-------------------------SECOND QUEST----------------------------------
+function questTwo(){
+    if(quest2 === true){
+    if(finalKey.available === false){
+        safeBoxOn = true;
+        enviromentText.innerHTML = "";
+        objectiveText.innerHTML = "Find the key";
+        enviromentText.innerHTML = "Did you really think, It was going to be easy?";
+
+        setTimeout(function(){
+            turnLightsOff();
+        }, 3000)
+     
+        
+        setTimeout(function(){
+           finalKey.available = true;
+        }, 7000);
+
+        setTimeout(function(){
+            showGhost = true;
+        }, 30000);
+    }
+    quest2 = false;
+}
+}
+
+//----------------------------LAST QUEST--------------------------------
+function lastQuest(){
+    if(quest3 === true){
+    objectiveText.innerHTML = "Go to the exit (orange carpet)";
+    if(newPlayer.x + newPlayer.width > 1200 && newPlayer.y + newPlayer.height > 500 && finalKey.available === true){
+        gameOn = false;
+        gameWon = true;
+        gameOff = true;
+        bckgrSoundOn = false;
+    }
+}
+}
+
 
 let frame = 0;
 
@@ -599,34 +651,41 @@ frame++;
     context.clearRect(0, 0, window.innerWidth, innerHeight);
     context.fillStyle = "orange";
     context.fillRect(1200, 500, 80, 100);
+ 
 
     for(let i = 0; i < arrayOfObjects.length; i++){
         arrayOfObjects[i].draw();
     }
+ 
     newPlayer.draw();
-    arrayOfItems.push(flashlight);
+
     if(showGhost === true){
         ghost.draw();
-        moveGhost(ghost.direction);
+        moveGhost(ghost, ghost.direction);
         characterCaught(newPlayer);
         if(showGhost === true && ghostSoundOn === true){
             ghostSound.play();
             ghostSoundOn = false;
         }
 }
-
+    
     for(let i = 0; i < arrayOfWall.length; i++){
         arrayOfWall[i].draw();
     }
-    if(showItems === true){
         for(let i = 0; i < arrayOfItems.length; i++){
+            if(arrayOfItems[i].available === true){
             arrayOfItems[i].draw();
     }
+}
+
+for(let i = 0; i < arrayOfBooks.length; i++){
+    arrayOfBooks[i].draw();
 }
 
 if(quest1 === true){
     questOne();
 }
+
 if(quest2 === true){
     questTwo();
 }
@@ -638,63 +697,171 @@ if(quest3 === true){
 if(frame % 2000 === 0){
     generateEnviroText();
 }
-}else if(gameOff === true){
+}else if(gameOn === false && gameWon === true){
+levelPassed();
+status.display = "none";
+//context.drawImage(youDied, (myCanvas.width / 3.3), (myCanvas.height / 2), 600, 200);
+}
+
+
+else if(gameOff === true && gameWon === false){
 gameOver();
+status.display = "none";
+context.drawImage(youDied, (myCanvas.width / 3.3), (myCanvas.height / 2), 600, 200);
+}
 }
 
-if(isLightOff === true){
-    turnLightOffV2(newPlayer);
-}
-
-}
-
-
-console.log(window.innerWidth);
-console.log(window.innerHeight);
 playSound();
 unlockSafeBox(newPlayer);
 movePlayer(newPlayer);
+readBook(newPlayer, book);
+readBook(newPlayer, book2);
+readBook(newPlayer, book3);
 
 
-function activateGame(){
-    window.addEventListener("click", function(event){
-    let mouseX = event.clientX;
-    let mouseY = event.clientY;
-    console.log(mouseX);
-    if(mouseX > startGameButton.x && mouseX < (startGameButton.x + 310) && mouseY > (startGameButton.y - 50) && mouseY < startGameButton.y){
-        console.log("CLICKED BUTTON");
-        pressed = true;
-        introOn = false;
-        console.log(pressed);
-    }
-})
-
-    window.addEventListener("mousemove", function(event){
-    let mouseX = event.clientX;
-    let mouseY = event.clientY;
-    if(mouseX > startGameButton.x && mouseX < (startGameButton.x + 310) && mouseY > (startGameButton.y - 50) && mouseY < startGameButton.y){
-    startGameButton.color = "White";
-    }else{
-        startGameButton.color = "darkGray"; 
-    }
 
 
-})
-}
 
+//-------------------GAME OVER FUNCTION------------------------------------------------------
 function gameOver(){
     bckgrSound.pause();
     overSound.play();
-    isLightOff = false;
+    let light = document.styleSheets[0].cssRules[5];
+    light.style.background = "";
+    status.style.display = "none"
 
     myCanvas.width = window.innerWidth;
     myCanvas.height = window.innerHeight;
     context.clearRect(0, 0, myCanvas.width, myCanvas.height)
     myCanvas.style.background = `url("/img/gameOverPicture2.gif")`;
     myCanvas.style.backgroundSize = "cover";
-    myCanvas.style.backgroundPositionY = "-100px"
+    myCanvas.style.backgroundPositionY = "-80px"
     myCanvas.style.backgroundRepeat = "no-repeat";
 }
+
+
+//------------------------LEVEL PASSED FUNCTION-----------------------------------------------------
+function levelPassed(){
+bckgrSound.pause();
+winSong.play();
+let light = document.styleSheets[0].cssRules[5];
+    light.style.background = "";
+
+    myCanvas.width = window.innerWidth;
+    myCanvas.height = window.innerHeight;
+    context.clearRect(0, 0, myCanvas.width, myCanvas.height)
+    myCanvas.style.background = `url("/img/winBackground.png")`;
+    myCanvas.style.backgroundSize = "cover";
+    myCanvas.style.backgroundPositionY = "-100px"
+    myCanvas.style.backgroundRepeat = "no-repeat";
+
+
+    context.fillStyle = "white";
+    context.font = "80px Arial";
+    context.fillText("You survived!", myCanvas.width/3.5, 200);
+
+    context.fillStyle = "white";
+    context.font = "30px Arial";
+    context.fillText("for now....", myCanvas.width/3.5, 300);
+
+     context.fillStyle = "white";
+     context.font = "60px Arial";
+    context.fillText("Will Continue.....", myCanvas.width/2, myCanvas.height - 100);
+
+
+}
+
+
+
+//------------------------SHOW CONTROLS------------------------------------------------------------
+function showControl(){
+    this.render = function(){
+    let winW = window.innerWidth;
+    let winH = 0;
+    let controlOverlay = document.getElementById('controloverlay');
+    let controlBox = document.getElementById('controlbox');
+    controlOverlay.style.display = "block";
+    controlOverlay.style.height = winH + "px";
+    controlOverlay.style.width = (winW/2) + "px";
+   // dialogBox.style.top = "100px";
+   controlBox.style.display = "block";
+document.getElementById('controlboxhead').innerHTML = "CONTROLS";
+document.getElementById('controlboxfoot').innerHTML = '<button onclick="controlBox.ok()">OK</button>';
+
+startButton.style.display = "none";
+controlButton.style.display = "none";
+    }
+    this.ok = function(){
+        let controlOverlay = document.getElementById('controloverlay');
+    let controlBox = document.getElementById('controlbox');
+    controlOverlay.style.display = "none";
+        controlBox.style.display = "none";
+
+        startButton.style.display = "flex";
+controlButton.style.display = "flex";
+    }
+    }
+
+
+
+//------------------------MAKE A CUSTOM ALERT BOX (CLASS)------------------------------------------------------------
+function customAlert(){
+    this.render = function(book){
+    let winW = window.innerWidth;
+    let winH = window.innerHeight;
+    let dialogOverLay = document.getElementById('dialogoverlay');
+    let dialogBox = document.getElementById('dialogbox');
+    dialogOverLay.style.display = "block";
+    dialogOverLay.style.height = winH + "px";
+   // dialogOverLay.style.left = (winW/2.5) + "px";
+   // dialogBox.style.top = "100px";
+    dialogBox.style.display = "block";
+document.getElementById('dialogboxhead').innerHTML = "NOTE";
+document.getElementById('dialogboxbody').innerHTML = `${book}`;
+document.getElementById('dialogboxfoot').innerHTML = '<button onclick="alertBox.ok()">OK</button>';
+    }
+    this.ok = function(){
+        let dialogOverLay = document.getElementById('dialogoverlay');
+    let dialogBox = document.getElementById('dialogbox');
+        dialogOverLay.style.display = "none";
+        dialogBox.style.display = "none";
+    }
+    }
+
+//---------------------MAKE A CUSTOM PROMPT BOX--------------------------------------------------------------------
+function customPrompt(){
+    this.render = function(textTitle, funct){
+        let winW = window.innerWidth;
+    let winH = window.innerHeight;
+    let dialogOverLay = document.getElementById('dialogoverlay');
+    let dialogBox = document.getElementById('dialogbox');
+    dialogOverLay.style.display = "block";
+    dialogOverLay.style.height = winH + "px";
+   // dialogOverLay.style.left = (winW/2.5) + "px";
+   // dialogBox.style.top = "100px";
+    dialogBox.style.display = "block";
+document.getElementById('dialogboxhead').innerHTML = textTitle;
+document.getElementById('dialogboxbody').innerHTML = "";
+document.getElementById('dialogboxbody').innerHTML = '<br><input id="prompt_value1">';
+document.getElementById('dialogboxfoot').innerHTML = `<button onclick="safePrompt.ok("${funct}()")">OK</button>`;
+
+
+    }
+    this.ok = function(funct){
+    let prompt_value1 = document.getElementById('prompt_value1').value;
+    safeAnswer = (prompt_value1);
+    [funct](safeAnswer);
+    document.getElementById('dialogoverlay').style.display = "none";
+     document.getElementById('dialogbox').style.display = "none";
+    }
+}
+
+
+
+
+
+
+
 
 // intro();
 // if(activateGame() === true){
@@ -705,6 +872,26 @@ function gameOver(){
 
 
 //----------------------------------ADDITIONAL OLD CODE---------------------------------------------------
+
+//-----------------------------------------CREATE BUTTON INSTANCE-----------------------------------------------
+// let startGameButton = new Button("Start Game",  (myCanvas.width / 2.5),  (myCanvas.height / 1.2), 60, "darkGray", "Helvetica");
+
+
+//----------------------------CHECK NUMBER OF PASSWORD-------------------------------------------------------------TESTING
+// function checkPassword(value){
+//     let pssword = "9856460";
+//     if(value === pssword){
+//        return true
+//     }else{
+//         return false;
+//     }
+
+// }
+
+
+
+
+
 
 
 //-----------------------COLLISION DETECTION WITH PIXELS----------------------------------------------------

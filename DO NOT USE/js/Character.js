@@ -10,7 +10,8 @@ class Character {
     this.height = height;
     this.orientation = "SOUTH";
     this.step = 0;
-    this.fashlight = true;
+    this.flashlight = false;
+    //this.theBag = [];
     
     this.draw = function(){
         let chrtImg = new Image();
@@ -21,24 +22,15 @@ class Character {
     
     this.update = function() {
         document.documentElement.style.setProperty('--objectX', (this.x + 150) + 'px');
-        document.documentElement.style.setProperty('--objectY', (this.y + 25) + 'px');
+        document.documentElement.style.setProperty('--objectY', (this.y + 20) + 'px');
     }
     
     this.flash = function(){
-
-// Fill with gradient
-        if(this.fashlight === true){
-            let grd = context.createRadialGradient(player.x, player.y, 0, player.x, player.y, 150);
-            grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-            grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
-            context.fillStyle = grd;
-context.fillRect(0, 0, myCanvas.width - 10,  myCanvas.height);
+        let flashLightOn = document.styleSheets[0].cssRules[5];
+        if(this.flashlight === true){
+        flashLightOn.style.background = "radial-gradient(circle 8vmax at var(--objectX) var(--objectY), rgba(0,0,0, 0) 0%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.90) 100%)";
     }else{
-        let grd = context.createRadialGradient(player.x, player.y, 0, player.x, player.y, 100);
-        grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-        grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
-        context.fillStyle = grd;
-context.fillRect(0, 0, myCanvas.width - 10,  myCanvas.height);
+        flashLightOn.style.background = "radial-gradient(circle 4vmax at var(--objectX) var(--objectY), rgba(0,0,0, 0) 0%, rgba(0,0,0,0.1) 80%, rgba(0,0,0,0.90) 100%)";
     
     }
     }

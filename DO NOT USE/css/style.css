@@ -1,0 +1,252 @@
+#introScreen{
+    display: block;
+    background-image: url("/img/introBackground.jpg");
+    background-size: cover;
+    background-position-y: -150px;
+    width: 100vw;
+    height: 100vh;
+}
+
+#start{
+    padding-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+.startBttn{
+    border: 0px transparent;
+    color: darkgray;
+    font-size: 60px;
+    background-color: transparent;
+}
+
+
+#myBoard{
+    padding: 0;
+    margin: auto;
+    display: none;
+    border: 1px solid rgba(70, 17, 17, 1);
+    background:linear-gradient(
+        rgba(10, 4, 4, 0.6), 
+        rgba(10, 4, 4, 0.8)
+      ), url("/img/Map2.png");
+    background-color: black;
+    background-size: cover;
+}
+
+:root{
+    --objectX: 0;
+    --objectY: 0;
+
+}
+
+:root::before{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 86%;
+    position: fixed;
+    pointer-events: none;
+    background: radial-gradient(circle 4vmax at var(--objectX) var(--objectY),
+    rgba(0,0,0, 0) 0%,
+    rgba(0,0,0, 0) 80%,
+    rgba(0,0,0, 0) 100%
+    )
+
+}
+
+
+body
+{
+    overflow: hidden;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+.item-list{
+    list-style: none;
+    display: flex;
+
+}
+
+.items{
+    margin: 0px 10px;
+}
+
+#status{
+    color: white;
+    height: 145px;
+    background-color: black;
+}
+
+.row{
+    height: 145px;
+}
+.name{
+    border: 3px solid white;
+}
+.statusTitle{
+    font-size: 20px;
+    margin-bottom: 30px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.objective{
+    border: 3px solid white;
+}
+
+.enviroment{
+    border: 3px solid white;
+}
+
+.startBttn:hover{
+    border: 0px transparent;
+    color: white;
+    font-size: 70px;
+    background-color: transparent;
+}
+
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #fff;
+    width: 100%;
+    z-index: 10;
+}
+
+#dialogbox{
+    display: none;
+    position: fixed;
+    background: rgb(177, 151, 4);
+    border-radius: 7px;
+    height: 500px;
+    width: 550px;
+    z-index: 10;
+}
+
+#dialogbox > div{
+    background: #fff;
+    margin: 8px;
+}
+
+#dialogbox > div > #dialogboxhead{
+    background: rgb(177, 151, 4);
+    font-size: 19px;
+    padding: 10px;
+    color:#000;
+}
+
+
+#dialogbox > div > #dialogboxbody{
+    background: rgb(201, 172, 7);
+    height: 370px;
+    padding: 20px;
+    color:#000;
+}
+
+#dialogbox > div > #dialogboxfoot{
+    background: rgb(177, 151, 4);
+    padding: 10px;
+    text-align: center;
+}
+
+#dialogbox > div > #dialogboxfoot button{
+    font-size: 30px;
+    border: 1px solid transparent;
+    background-color: transparent;
+}
+
+#controlbox{
+    display: none;
+    position: fixed;
+    left: 15vw;
+    background: rgba(17, 15, 1, 0.622);
+    border-radius: 7px;
+    height: 700px;
+    width: 70vw;
+    z-index: 10;
+}
+
+#controlbox > div{
+    background: rgba(17, 15, 1, 0.622);
+    margin: 8px;
+}
+
+#controlbox > div > #controlboxhead{
+    background: rgba(17, 15, 1, 0.622);
+    font-size: 19px;
+    padding: 10px;
+    color:#fff;
+}
+
+
+#controlbox > div > #controlboxbody{
+    background: rgba(17, 15, 1, 0.622);
+    height: 76vh;
+    padding: 20px;
+    color:#fff;
+}
+
+#controlbox > div > #controlboxfoot{
+    background: rgba(17, 15, 1, 0.622);
+    padding: 10px;
+    text-align: center;
+}
+
+#controlbox > div > #controlboxfoot button{
+    font-size: 30px;
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: white;
+}
+
+
+
+#controls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+}
+
+.controlBttn{
+    border: 0px transparent;
+    color: darkgray;
+    font-size: 30px;
+    background-color: transparent;
+}
+
+.controlBttn:hover{
+    border: 0px transparent;
+    color: white;
+    font-size: 40px;
+    background-color: transparent;
+}
+
+#mainTitle {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#mainTitle img{
+    height: 80px;
+    height: 80px;
+}
+

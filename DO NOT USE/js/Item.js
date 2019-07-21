@@ -8,6 +8,7 @@ class Item{
         this.height = height;
         this.icon = icon;
         this.available = false;
+        this.usable = false;
 
     }
     draw(){

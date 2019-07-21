@@ -7,9 +7,9 @@ class Furniture{
         this.width = width;
         this.height = height;
 
-        this.use = function(player){
-            if(player.x - (this.x + this.width) < 20 && this.x - (player.x + player.width) < 20 &&
-            this.y - (player.y + player.height) < 20 && player.y - (this.y + this.height) < 20){
+        this.use = function(){
+            if(item.x - (this.x + this.width) < 10 && this.x - (item.x + item.width) < 10 &&
+            this.y - (item.y + item.height) < 10 && item.y - (this.y + this.height) < 10){
             return true;
         }
         return false;
