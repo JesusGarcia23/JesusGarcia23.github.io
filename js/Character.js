@@ -10,7 +10,8 @@ class Character {
     this.height = height;
     this.orientation = "SOUTH";
     this.step = 0;
-    this.fashlight = true;
+    this.flashlight = true;
+    //this.theBag = [];
     
     this.draw = function(){
         let chrtImg = new Image();
@@ -19,29 +20,6 @@ class Character {
     
     }
     
-    this.update = function() {
-        document.documentElement.style.setProperty('--objectX', (this.x + 150) + 'px');
-        document.documentElement.style.setProperty('--objectY', (this.y + 25) + 'px');
-    }
-    
-    this.flash = function(){
-
-// Fill with gradient
-        if(this.fashlight === true){
-            let grd = context.createRadialGradient(player.x, player.y, 0, player.x, player.y, 150);
-            grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-            grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
-            context.fillStyle = grd;
-context.fillRect(0, 0, myCanvas.width - 10,  myCanvas.height);
-    }else{
-        let grd = context.createRadialGradient(player.x, player.y, 0, player.x, player.y, 100);
-        grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-        grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
-        context.fillStyle = grd;
-context.fillRect(0, 0, myCanvas.width - 10,  myCanvas.height);
-    
-    }
-    }
     
     //---------------------------------GRAB FUNCTION---------------------------------------------------------------------
     this.grab = function(item){

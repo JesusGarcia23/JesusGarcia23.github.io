@@ -1,7 +1,8 @@
 
 //----------------------CLASS GHOST------------------------------------------------------------
 class Ghost{
-    constructor(x, y, width, height){
+    constructor(theImg, x, y, width, height){
+        this.theImg = theImg;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -9,8 +10,10 @@ class Ghost{
         this.direction = "NORTH";
     
         this.draw = function(){
-            context.fillStyle = "red";
-            context.fillRect(this.x, this.y, this.width, this.height);
+            let ghostSprite = new Image();
+            ghostSprite.src = this.theImg;
+            context.drawImage(ghostSprite, this.x, this.y, this.width, this.height)
+           // context.fillRect(this.x, this.y, this.width, this.height);
         }
     
         this.collision = function(obj){
