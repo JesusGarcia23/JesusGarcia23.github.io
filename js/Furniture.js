@@ -27,6 +27,7 @@ class Furniture{
 //--------------------------------INSTANCES OF FURNITURE----------------------------------------------------------------------
 let blood = new Furniture("/img/blood.png", 650, 420, 150, 50);
 let blood2 = new Furniture("/img/blood2.png", 1050, 60, 100, 100);
+let blood3 = new Furniture("/img/blood3.png", 800, 10, 150, 90);
 let garbageCan = new Furniture("/img/garbageCan.png", 1234, 120, 30, 30);
 let finalCarpet = new Furniture("/img/finalCarpet.png", 1200, 500, 80, 100);
 let secretWay = new Furniture("/img/secretWay.png", 470, 250, 70, 90);
@@ -40,8 +41,8 @@ let livingChair2 = new Furniture("/img/livingChair2.png", 1180, 310, 40, 40);
 let ovalTable = new Furniture("/img/ovalTable.png", 1225, 300, 45, 45);
 
 
-let largeTable = new Furniture("/img/largeTable.png", 460, 200, 150, 40);
-let largeTable2 = new Furniture("/img/largeTable.png", 600, 200, 150, 40);
+//let largeTable = new Furniture("/img/largeTable.png", 460, 200, 150, 40);
+// let largeTable2 = new Furniture("/img/largeTable.png", 600, 200, 150, 40);
 let largeTable3 = new Furniture("/img/largeTable.png", 460, 350, 150, 40);
 let largeTable4 = new Furniture("/img/largeTable.png", 600, 350, 150, 40);
 let largeTable5 = new Furniture("/img/largeTable.png", 750, 200, 150, 40);
@@ -57,7 +58,6 @@ let dinnerChair4 = new Furniture("/img/dinnerChairBottom.png", 119, 550, 40, 40)
 
 let workbench = new Furniture("/img/Workbench-1.png", 490, 10, 145, 30);
 let workbench2 = new Furniture("/img/Workbench-1.png", 635, 10, 145, 30);
-let workbench3 = new Furniture("/img/Workbench-1.png", 780, 10, 140, 30);
 
 let refri = new Furniture("/img/Refri.png", 130, 290, 70, 30);
 let cook = new Furniture("/img/Cook.png", 10, 330, 50, 50);
@@ -152,3 +152,13 @@ let box9 = new Furniture("/img/Box.png", 785, 570, 30, 30);
 let box10 = new Furniture("/img/Box.png", 815, 570, 30, 30);
 let box11 = new Furniture("/img/Box.png", 845, 570, 30, 30);
 let box12 = new Furniture("/img/Box.png", 730, 570, 30, 30);
+
+let piano = new Furniture("/img/piano.png", 620, 200, 80, 40);
+let pianoChair = new Furniture("/img/pianoChair.png", 630, 240, 60, 30);
+let screwdriver = new Furniture("/img/screwdriver.png", 570, 12, 20, 20);
+let hammer = new Furniture("/img/hammer.png", 600, 12, 25, 25);
+let saw = new Furniture("/img/saw.png", 640, 12, 40, 25);
+let gloves = new Furniture("/img/gloves.png", 680, 12, 25, 25);
+let stand = new Furniture("/img/stand.png", 470, 200, 100, 50);
+let teaTable = new Furniture("/img/dinnerTable.png", 780, 200, 50, 50);
+let singleChair3 = new Furniture("/img/singleChair.png", 830, 200, 30, 30);

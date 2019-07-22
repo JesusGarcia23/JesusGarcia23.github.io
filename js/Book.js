@@ -39,4 +39,14 @@ let book = new Book("/img/books.png", 1140, 20, 100, 30, "It has been so long.. 
  let book4 = new Book("/img/bookLeft.png", 700, 510, 30, 30, "I've survived 3 days with all this darkness, thanks to that purple flashlight.. I wish I could see my family again...");
 
  let book5 = new Book("/img/book1.png", 150, 470, 20, 20, "Weeks inside this place, I don't want to stay here but I'm scared what is outside, the last person I saw\
-  passing the door with the red carpet, never came back. Is he alive? Could He make it? Hmmmm.. I hear some voices..."); //START ROOM BOOK
+  passing the door with the red carpet, never came back. Is he alive? Could He make it? Hmmmm.. I hear some voices..."); //KITCHEN ROOM BOOK
+
+  let book6 = new Book("/img/book1.png", 810, 210, 20, 20, "I’ve decided after all this time, even without knowing where I’m at, that there is no way to escape from this hell. \
+  Death is unavoidable. Dreadfully, I’ll just stay here, playing this old piano until the end.\
+  I’ve done too many atrocious things. I wish could go back and fix it, but it’s too late for that now..\
+  <br><br><br><br><br><br><br><br><br><br>-Michael. "); //PIANO ROOM BOOK
+
+  
+  let book7 = new Book("/img/book1.png", 730, 20, 20, 20, "Maybe this is going to be my last text, I don't trust anyone, just myself\
+  , people around me, they look at me like I'm a monster, but I don't care. If they mess with me, I'll show them a real monster.\
+  <br><br><br><br><br><br><br><br><br><br>-Fred."); //TOOLS ROOM BOOK

@@ -182,11 +182,11 @@ arrayOfWall.push(finalRoomWall2);
 arrayOfObjects.push(bed);
 arrayOfWall.push(wardrobe);
 
-arrayOfWall.push(largeTable);
-arrayOfWall.push(largeTable2);
+//arrayOfWall.push(largeTable);
+//arrayOfWall.push(largeTable2);
 arrayOfWall.push(largeTable3);
 arrayOfWall.push(largeTable4);
-arrayOfWall.push(largeTable5);
+//arrayOfWall.push(largeTable5);
 arrayOfWall.push(largeTable6);
 arrayOfWall.push(ovalTable);
 
@@ -194,7 +194,6 @@ arrayOfWall.push(bath);
 
 arrayOfWall.push(workbench);
 arrayOfWall.push(workbench2);
-arrayOfWall.push(workbench3);
 arrayOfWall.push(box);
 arrayOfWall.push(box2);
 arrayOfWall.push(box3);
@@ -237,18 +236,18 @@ arrayOfObjects.push(singleChair2);
 arrayOfObjects.push(secretWay);
 arrayOfWall.push(plant);
 arrayOfWall.push(plant2);
-arrayOfWall.push(plant3);
-arrayOfWall.push(plant4);
-arrayOfWall.push(plant5);
-arrayOfWall.push(plant6);
-arrayOfWall.push(plant7);
-arrayOfWall.push(plant8);
-arrayOfWall.push(plant9);
-arrayOfWall.push(plant10);
-arrayOfWall.push(plant11);
-arrayOfWall.push(plant12);
-arrayOfWall.push(plant13);
-arrayOfWall.push(plant14);
+// arrayOfWall.push(plant3);
+// arrayOfWall.push(plant4);
+// arrayOfWall.push(plant5);
+// arrayOfWall.push(plant6);
+// arrayOfWall.push(plant7);
+// arrayOfWall.push(plant8);
+// arrayOfWall.push(plant9);
+// arrayOfWall.push(plant10);
+// arrayOfWall.push(plant11);
+// arrayOfWall.push(plant12);
+//arrayOfWall.push(plant13);
+//arrayOfWall.push(plant14);
 arrayOfWall.push(tv);
 arrayOfWall.push(garbageCan);
 arrayOfWall.push(ovalTable2);
@@ -258,6 +257,7 @@ arrayOfObjects.push(brokenPaint);
 arrayOfObjects.push(brokenDoor);
 arrayOfObjects.push(glassBroken7);
 arrayOfObjects.push(glassBroken8);
+arrayOfObjects.push(pianoChair);
 arrayOfObjects.push(carpet);
 arrayOfObjects.push(blood);
 arrayOfObjects.push(blood2);
@@ -298,10 +298,18 @@ arrayOfBooks.push(book2);
 arrayOfBooks.push(book3);
 arrayOfBooks.push(book4);
 arrayOfBooks.push(book5);
+arrayOfBooks.push(book6);
+arrayOfBooks.push(book7);
 arrayOfWall.push(safeBox);
-
-
-
+arrayOfWall.push(piano);
+arrayOfWall.push(stand);
+arrayOfWall.push(teaTable);
+arrayOfObjects.push(singleChair3);
+arrayOfObjects.push(screwdriver);
+arrayOfObjects.push(hammer);
+arrayOfObjects.push(saw);
+arrayOfObjects.push(gloves);
+arrayOfObjects.push(blood3);
 //-----------------------------PUSH TO ARRAY OF ITEMS------------------------------------------------------------------------
 flashlight.available = true;
 arrayOfItems.push(flashlight);
@@ -597,13 +605,6 @@ frame++;
 }
     window.requestAnimationFrame(animate);
     context.clearRect(0, 0, window.innerWidth, innerHeight);
- 
-
-    for(let i = 0; i < arrayOfObjects.length; i++){
-        arrayOfObjects[i].draw();
-    }
- 
-    newPlayer.draw();
 
     if(showGhost === true){
         ghost.draw();
@@ -618,6 +619,13 @@ frame++;
     for(let i = 0; i < arrayOfWall.length; i++){
         arrayOfWall[i].draw();
     }
+
+
+    for(let i = 0; i < arrayOfObjects.length; i++){
+        arrayOfObjects[i].draw();
+    }
+ 
+
         for(let i = 0; i < arrayOfItems.length; i++){
             if(arrayOfItems[i].available === true){
             arrayOfItems[i].draw();
@@ -628,6 +636,7 @@ for(let i = 0; i < arrayOfBooks.length; i++){
     arrayOfBooks[i].draw();
 }
 
+newPlayer.draw();
 if(quest1 === true){
     questOne();
 }
@@ -673,8 +682,8 @@ readBook(newPlayer, book2);
 readBook(newPlayer, book3);
 readBook(newPlayer, book4);
 readBook(newPlayer, book5);
-
-
+readBook(newPlayer, book6);
+readBook(newPlayer, book7);
 
 //-------------------GAME OVER FUNCTION------------------------------------------------------
 function gameOver(){
