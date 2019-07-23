@@ -4,9 +4,9 @@ class TurnLightsOff{
     constructor(){
     }
     draw(x, y, radius){
-        let grd = context.createRadialGradient(x + 20, y + 20, 0, x, y, radius);
+        let grd = context.createRadialGradient(x + 20, y + 20, 0, x + 20, y + 20, radius);
         grd.addColorStop(0, "rgba(0, 0, 0, 0)");
-        grd.addColorStop(1, "rgba(0, 0, 0, 0.98)");
+        grd.addColorStop(1, "rgba(0, 0, 0, 1)");
         
 // Fill with gradient
 context.fillStyle = grd;

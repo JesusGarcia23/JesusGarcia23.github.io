@@ -98,7 +98,7 @@ let showGhost = false;
 let safeBoxUsed = false;
 let safeBoxOn = false;
 let ghostSoundOn = true;
-let theRadius = 100;
+let theRadius = 70;
 let littlemssg = true;
 //-------------------------------------QUESTS----------------------------------------------------------------
 let quest1 = true;
@@ -325,10 +325,10 @@ switch(event.keyCode){
     player.orientation = "NORTH";
     for(let i = 0; i < arrayOfWall.length; i++){
         if(player.collision(arrayOfWall[i]) === true){
-            player.y += 6;
+            player.y += 10;
         }
     }
-    player.y -= 6;
+    player.y -= 10;
  
     player.characterImg = "/img/character/face-top.png"
     break;
@@ -337,10 +337,10 @@ switch(event.keyCode){
     player.orientation = "EAST";
     for(let i = 0; i < arrayOfWall.length; i++){
         if(player.collision(arrayOfWall[i]) === true){
-            player.x -= 6;
+            player.x -= 10;
     }  
 }
-player.x += 6;
+player.x += 10;
 player.characterImg = "/img/character/face-right.png"
     break;
 
@@ -348,10 +348,10 @@ player.characterImg = "/img/character/face-right.png"
     player.orientation = "SOUTH";
     for(let i = 0; i < arrayOfWall.length; i++){
         if(player.collision(arrayOfWall[i]) === true){
-            player.y -= 6;
+            player.y -= 10;
     }
 }
-player.y += 6;
+player.y += 10;
 player.characterImg = "/img/character/face-down.png"
     break;
 
@@ -359,10 +359,10 @@ player.characterImg = "/img/character/face-down.png"
     player.orientation = "WEST";
     for(let i = 0; i < arrayOfWall.length; i++){
         if(player.collision(arrayOfWall[i]) === true){
-            player.x += 6;
+            player.x += 10;
         }    
 }
-player.x -= 6;
+player.x -= 10;
 player.characterImg = "/img/character/face-left.png"
     break;
 
@@ -372,7 +372,7 @@ player.characterImg = "/img/character/face-left.png"
             theRadius = 150;
             player.flashlight = false;
         }else{
-            theRadius = 100;
+            theRadius = 70;
             player.flashlight = true;
         }
         flashLightSound.play();
@@ -493,8 +493,8 @@ setTimeout(function(){
 }, 3000)
 
 setTimeout(function(){
-    enviromentText.innerHTML = " ";
-}, 1000)
+    enviromentText.innerHTML = "";
+}, 4000)
 }
 
 //----------------------------SAFEBOX-------------------------------------------------
